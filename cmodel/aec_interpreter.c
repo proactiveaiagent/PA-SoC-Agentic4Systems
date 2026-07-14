@@ -145,8 +145,8 @@ static void exec_lane(aec_machine_t *m, int warp_id, aec_thread_t *t, const aec_
         t->gprs[rd + 1] = inst->word1;
         break;
     case 0x0051: /* CPY */
-        if (rs1 >= 0x0100)
-            t->gprs[rd] = special_reg(t, rs1);
+        if ((inst->word2 & 0xffffu) >= 0x0100u)
+            t->gprs[rd] = special_reg(t, (uint16_t)(inst->word2 & 0xffffu));
         else
             t->gprs[rd] = t->gprs[rs1];
         break;
