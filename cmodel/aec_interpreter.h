@@ -40,9 +40,11 @@ typedef struct {
 
 typedef struct {
     aec_thread_t lanes[AEC_WARP_SIZE];
+    uint32_t pc;
     uint32_t call_stack[32];
     int call_depth;
     uint8_t completed;
+    uint8_t halted;
 } aec_warp_t;
 
 typedef struct {
@@ -69,6 +71,18 @@ int  aec_machine_launch(aec_machine_t *m, uint32_t gx, uint32_t gy, uint32_t gz,
                         uint32_t bx, uint32_t by, uint32_t bz, uint32_t prog_len);
 int  aec_machine_step(aec_machine_t *m);
 int  aec_machine_run(aec_machine_t *m, uint64_t max_cycles);
+
+/* 回归测试 API */
+int aec_run_case(
+    const aec_inst_t *prog, size_t prog_count,
+    uint32_t gx, uint32_t gy, uint32_t gz,
+    uint32_t bx, uint32_t by, uint32_t bz,
+    uint8_t *gmem, size_t gmem_size,
+    uint8_t *cmem, size_t cmem_size,
+    uint64_t max_cycles,
+    uint64_t *out_cycles,
+    int *out_error
+);
 
 uint16_t aec_opcode(const aec_inst_t *i);
 uint8_t  aec_type(const aec_inst_t *i);

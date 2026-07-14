@@ -1,0 +1,2 @@
+tests/aec_cases/abi/c0_smoke
+tests/aec_cases/cpy/c1_normal_simt

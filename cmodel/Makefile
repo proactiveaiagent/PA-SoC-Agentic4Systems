@@ -1,9 +1,7 @@
 CC = gcc
-CXX = g++
 CFLAGS = -Wall -Wextra -std=c11 -O2
-CXXFLAGS = -Wall -Wextra -std=c++17 -O2
 
-TARGETS = pa_cmodel_demo aec_cmodel_demo
+TARGETS = pa_cmodel_demo aec_cmodel_demo aec_case_runner
 
 all: $(TARGETS)
 
@@ -12,6 +10,9 @@ pa_cmodel_demo: pa_cmodel.c
 
 aec_cmodel_demo: aec_interpreter.c aec_cmodel_main.c
 	$(CC) $(CFLAGS) -o $@ aec_interpreter.c aec_cmodel_main.c
+
+aec_case_runner: aec_interpreter.c aec_case_runner.c
+	$(CC) $(CFLAGS) -o $@ aec_interpreter.c aec_case_runner.c
 
 run: aec_cmodel_demo
 	./aec_cmodel_demo

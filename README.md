@@ -11,7 +11,23 @@
        → 推理引擎 → 记忆子系统 → 工具编排 → RL 反馈
 ```
 
-## 快速开始
+## 官方 testcases 回归
+
+```bash
+# 初始化用例（优先网络下载官方 36 用例，离线时使用 bundled）
+bash scripts/setup_testcases.sh
+
+# 运行全部公开用例回归
+python3 tests/regression/run_regression.py
+
+# 单个用例
+python3 tests/regression/run_regression.py --case abi/c0_smoke
+
+# 竞赛标准入口
+bash scripts/run_tests.sh --suite public --output evidence/regression
+```
+
+回归报告输出至 `evidence/regression/regression_report.json`。
 
 ```bash
 # 1. 主动智能体端到端演示

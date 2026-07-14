@@ -15,11 +15,11 @@ int main(void) {
     /* LOADI R1, 42 */
     prog[0].word0 = 42;
     prog[0].word2 = (1u << 16);
-    prog[0].word3 = (0x0050u << 16);
+    prog[0].word3 = (0x0055u << 16);  /* LOADI */
 
-    /* CPY R2, %tid.x  (src1 = 0x0100) */
+    /* CPY R2, %tid.x */
     prog[1].word2 = (2u << 16) | 0x0100u;
-    prog[1].word3 = (0x0051u << 16) | (8u << 3);
+    prog[1].word3 = (0x0054u << 16) | (8u << 3);  /* CPY .u32 */
 
     /* ADD R3, R1, R2 */
     prog[2].word1 = 2;
