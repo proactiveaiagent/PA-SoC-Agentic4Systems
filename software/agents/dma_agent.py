@@ -18,14 +18,18 @@ def decide(case: dict) -> dict:
     # PA-SoC 优化：感知数据流优先走 channel 0，反应用 channel 1
     channel = 0 if direction == "h2d" else 1
 
-    # 大块数据分片传输，减少 DMA 延迟
-    chunk_bytes = min(bytes_, max(alignment, 4096))
-    if bytes_ > 65536:
-        chunk_bytes = 16384
-    elif bytes_ > 16384:
-        chunk_bytes = 8192
+    # 竞赛合规：chunk 仅允许 4096 / 65536 / 1048576
+    LEGAL_CHUNKS = (4096, 65536, 1048576)
+    for c in reversed(LEGAL_CHUNKS):
+        if bytes_ >= c:
+            chunk_bytes = c
+            break
+    else:
+        chunk_bytes = 4096
 
-    queue_depth = min(concurrency, 4)
+    queue_depth = min(max(concurrency, 1), 8)
+    if queue_depth not in (1, 2, 4, 8):
+        queue_depth = 2 if concurrency >= 2 else 1
     use_zero_copy = registered and bytes_ >= alignment
 
     return {

@@ -144,7 +144,7 @@ def main():
 
     # Agents
     def _dma():
-        script = os.path.join(os.path.dirname(__file__), "..", "software", "agents", "dma_agent.py")
+        script = os.path.join(os.path.dirname(__file__), "..", "agents", "dma_agent.py")
         inp = json.dumps({"case_id": 1, "direction": "h2d", "bytes": 4096, "alignment": 64, "registered": True, "concurrency": 2})
         r = subprocess.run(["python3", script], input=inp, capture_output=True, text=True)
         out = json.loads(r.stdout)
@@ -152,7 +152,7 @@ def main():
     test("agent: dma", _dma)
 
     def _kernel():
-        script = os.path.join(os.path.dirname(__file__), "..", "software", "agents", "kernel_agent.py")
+        script = os.path.join(os.path.dirname(__file__), "..", "agents", "kernel_agent.py")
         inp = json.dumps({
             "case_id": 1, "dtype": "f16", "m": 128, "n": 128, "k": 128,
             "alignment": 16, "workspace": 8192,
