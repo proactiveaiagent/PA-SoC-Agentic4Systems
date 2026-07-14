@@ -19,7 +19,7 @@ if command -v gh &>/dev/null; then
     gh auth status || gh auth login
     gh repo create "$REPO_NAME" --public --description "$DESCRIPTION" --source "$GIT_WORK_TREE" --remote origin --push
     gh repo view --web 2>/dev/null || true
-    echo "完成！仓库地址: https://github.com/$(gh api user -q .login)/$REPO_NAME"
+    echo "完成！仓库地址: https://github.com/proactiveaiagent/$REPO_NAME"
     exit 0
 fi
 
@@ -33,7 +33,7 @@ if [ -z "$TOKEN" ]; then
     echo "错误：未找到 GitHub 凭据。请先运行: gh auth login"
     echo "或在 GitHub 网页创建空仓库后执行:"
     echo "  export GIT_DIR=/tmp/pa-soc-git.git GIT_WORK_TREE=/Users/jel/PA-SoC-Agentic4Systems"
-    echo "  git remote add origin https://github.com/<你的用户名>/$REPO_NAME.git"
+    echo "  git remote add origin https://github.com/proactiveaiagent/$REPO_NAME.git"
     echo "  git push -u origin main"
     exit 1
 fi
