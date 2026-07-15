@@ -1,0 +1,5 @@
+#!/bin/bash
+# C1 反汇编器入口：C1/compiler/aec-objdump
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+exec python3 "$ROOT/src/aec_objdump.py" "$@"

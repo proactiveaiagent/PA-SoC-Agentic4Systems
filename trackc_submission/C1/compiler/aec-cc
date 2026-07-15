@@ -1,0 +1,5 @@
+#!/bin/bash
+# C1 编译器统一入口：C1/compiler/aec-cc
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+exec python3 "$ROOT/src/aec_cc.py" "$@"
